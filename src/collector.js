@@ -35,6 +35,9 @@ const SOURCES = [
   { id: 'reddit-obsidian', name: 'Reddit r/ObsidianMD', url: 'https://www.reddit.com/r/ObsidianMD/.rss', fallback: 'https://www.reddit.com/r/ObsidianMD.json', fallbackType: 'reddit-json', category: 'productivity', maxItems: 3 },
   { id: 'huggingface', name: 'Hugging Face Blog', url: 'https://huggingface.co/blog/feed.xml', fallback: '', category: 'AI-Agent', maxItems: 3 },
   { id: 'tldr-ai', name: 'TLDR AI', url: 'https://tldr.tech/api/rss/ai', fallback: '', category: 'AI-Agent', maxItems: 5 },
+  // 中文源
+  { id: 'ithome', name: 'IT之家', url: 'https://rss.ithome.com/rss/news.xml', fallback: '', category: 'dev-tools', maxItems: 4 },
+  { id: '36kr', name: '36氪', url: 'https://36kr.com/feed', fallback: '', category: 'productivity', maxItems: 4 },
 ];
 
 const VALID_CATEGORIES = ['AI-Agent', 'dev-tools', 'productivity', 'other'];

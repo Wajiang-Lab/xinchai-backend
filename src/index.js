@@ -12,6 +12,7 @@ const obsidianWriter = require('./obsidian-writer');
 const collector = require('./collector');
 const users = require('./users');
 const pusher = require('./pusher');
+const { translateItems } = require('./translator');
 
 const app = express();
 const PORT = config.PORT;
@@ -256,6 +257,10 @@ app.delete('/api/reports/:date', requireAdmin, (req, res) => {
 app.post('/api/admin/collect', requireAdmin, async (req, res) => {
   try {
     const digest = await collector.generateDailyDigest();
+    // 翻译英文内容为中文
+    if (config.DOUBAO_API_KEY) {
+      digest.items = await translateItems(digest.items, config.DOUBAO_API_KEY);
+    }
     await withLock(async () => {
       const reports = loadData();
       const existingIdx = reports.findIndex(r => r.date === digest.date);
@@ -369,6 +374,10 @@ cron.schedule('0 8 * * *', async () => {
   console.log('⏰ 定时采集 [08:00]');
   try {
     const digest = await collector.generateDailyDigest();
+    // 翻译英文内容为中文
+    if (config.DOUBAO_API_KEY) {
+      digest.items = await translateItems(digest.items, config.DOUBAO_API_KEY);
+    }
     await withLock(async () => {
       const reports = loadData();
       const existingIdx = reports.findIndex(r => r.date === digest.date);
