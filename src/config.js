@@ -26,7 +26,7 @@ function loadConfig() {
     WECHAT_SECRET: process.env.WECHAT_SECRET || '',
     PORT: parseInt(process.env.PORT || '3000', 10),
     ADMIN_KEY: process.env.ADMIN_KEY || 'xinchai-dev-key-change-me',
-    DOUBAO_API_KEY: process.env.DOUBAO_API_KEY || '',
+    AI_API_KEY: process.env.DEEPSEEK_API_KEY || process.env.DOUBAO_API_KEY || '',
   };
 }
 

@@ -258,8 +258,8 @@ app.post('/api/admin/collect', requireAdmin, async (req, res) => {
   try {
     const digest = await collector.generateDailyDigest();
     // 翻译英文内容为中文
-    if (config.DOUBAO_API_KEY) {
-      digest.items = await translateItems(digest.items, config.DOUBAO_API_KEY);
+    if (config.AI_API_KEY) {
+      digest.items = await translateItems(digest.items, config.AI_API_KEY);
     }
     await withLock(async () => {
       const reports = loadData();
@@ -375,8 +375,8 @@ cron.schedule('0 8 * * *', async () => {
   try {
     const digest = await collector.generateDailyDigest();
     // 翻译英文内容为中文
-    if (config.DOUBAO_API_KEY) {
-      digest.items = await translateItems(digest.items, config.DOUBAO_API_KEY);
+    if (config.AI_API_KEY) {
+      digest.items = await translateItems(digest.items, config.AI_API_KEY);
     }
     await withLock(async () => {
       const reports = loadData();
