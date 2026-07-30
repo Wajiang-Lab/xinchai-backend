@@ -425,7 +425,7 @@ function formatDateLabel(dateStr) {
 // 启动
 // ============================================
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`📡 信差 API: http://localhost:${PORT}`);
   console.log(`⏰ 定时采集: 每天 08:00 (北京时间)`);
 });
