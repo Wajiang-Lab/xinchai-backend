@@ -22,11 +22,7 @@ const MAX_REPORTS = 365;
 
 // 安全中间件
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'http://127.0.0.1:3000',
-  ],
+  origin: '*',
   methods: ['GET', 'POST', 'DELETE'],
 }));
 app.use(express.json({ limit: '1mb' }));
