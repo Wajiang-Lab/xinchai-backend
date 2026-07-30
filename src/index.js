@@ -257,6 +257,7 @@ app.delete('/api/reports/:date', requireAdmin, (req, res) => {
 app.post('/api/admin/collect', requireAdmin, async (req, res) => {
   try {
     const digest = await collector.generateDailyDigest();
+    console.log(`[调试] AI_API_KEY 已配置: ${!!config.AI_API_KEY}, 长度: ${config.AI_API_KEY?.length || 0}`);
     // 翻译英文内容为中文
     if (config.AI_API_KEY) {
       digest.items = await translateItems(digest.items, config.AI_API_KEY);
