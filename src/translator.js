@@ -35,11 +35,18 @@ async function translateItems(items, apiKey) {
         const lines = translated.split('\n');
         let currentIdx = 0;
         for (const line of lines) {
-          const match = line.match(/^\[(\d+)\]/);
+          const match = line.match(/^\[(\d+)\]\s*(.*)/);
           if (match) {
             const idx = parseInt(match[1]) - 1;
             if (idx >= 0 && idx < results.length) {
               currentIdx = idx;
+            }
+            // 处理同一行里 [n] 后面的内容
+            const rest = match[2] || '';
+            if (rest.startsWith('标题:')) {
+              results[currentIdx].title = rest.replace(/^标题:\s*/, '').trim();
+            } else if (rest.startsWith('摘要:')) {
+              results[currentIdx].summary = rest.replace(/^摘要:\s*/, '').trim();
             }
           } else if (line.startsWith('标题:') && currentIdx < results.length) {
             results[currentIdx].title = line.replace(/^标题:\s*/, '').trim();
